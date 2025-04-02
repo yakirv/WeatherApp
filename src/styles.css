@@ -1,19 +1,33 @@
-
-body{
+body {
     margin: 0;
     height: 90vh;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
+    font-family:
+        ' sans-serif ,Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS';
 }
-#header
-{
+#header {
     background-color: blue;
     grid-column: 1 / 7;
 }
-#content
-{
+#content {
     background-color: cadetblue;
     grid-column: 1 / 7;
     grid-row: 2 / 6;
+}
+#my-location {
+    background-color: white;
+    width: 25%;
+    margin: 1.5em;
+    padding: 1em;
+    border-radius: 30px;
+}
+#my-location-data {
+    display: grid;
+    grid-template-columns: 0.4fr 0.5fr;
+    padding: 0.2em;
+}
+.my-location-property {
+    font-weight: 800;
 }
