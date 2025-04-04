@@ -17,6 +17,7 @@ export class UI {
             this.container = document.getElementById('next-days-container')
             this.dataDetailed = document.getElementById('data-detailed-slides')
             this.icon = document.getElementById('icon-weather')
+            this.clickSearch()
             //  this.slides = document.getElementsByClassName('today-card-detailed')
             setTimeout(() => {
                 this.carousel()
@@ -24,6 +25,12 @@ export class UI {
         })
     }
 
+    clickSearch() {
+        const searchBtn = document.getElementById('search-button')
+        searchBtn.addEventListener('click', () => {
+            alert('CLicKCkCK')
+        })
+    }
     async loadIcon(src) {
         try {
             const icon = await import(`/src/iconsColor/${src}.png`)
