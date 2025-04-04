@@ -159,13 +159,18 @@ export class UI {
         prevButton.addEventListener('click', goToNextSlide)
 
         // Optional: Auto-play functionality
-        // const autoPlayInterval = setInterval(goToNextSlide, 5000);
+        let autoPlayInterval = setInterval(goToNextSlide, 5000)
 
         // Optional: Pause auto-play on hover
-        // slidesContainer.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
-        // slidesContainer.addEventListener('mouseleave', () => autoPlayInterval = setInterval(goToNextSlide, 5000));
+        slidesContainer.addEventListener('mouseenter', () =>
+            clearInterval(autoPlayInterval)
+        )
+        slidesContainer.addEventListener(
+            'mouseleave',
+            () => (autoPlayInterval = setInterval(goToNextSlide, 5000))
+        )
 
-        // Initialize carousel
+        //  Initialize carousel
         updateCarousel()
     }
 }

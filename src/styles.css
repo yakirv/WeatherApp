@@ -26,6 +26,7 @@ body {
     right: 30%;
 }
 #search-button {
+    font-family: sans-serif;
     border-style: none;
     background-color: transparent;
     font-weight: 900;
@@ -34,7 +35,7 @@ body {
     border-radius: 20px;
     position: relative;
     top: 30%;
-    left: 10%;
+    right: 25%;
 }
 #search-button:hover {
     background-color: #0090c1;
@@ -43,7 +44,8 @@ body {
 }
 /* Main content */
 #content {
-    background-color: cadetblue;
+    background-color: rgb(36, 139, 143);
+    background: linear-gradient(to top, #62a4c2, #ffffff);
     grid-column: 1 / 7;
     grid-row: 2 / 7;
     overflow-x: hidden; /* Prevent horizontal scrolling */
@@ -93,7 +95,7 @@ body {
 
 /* Weather data detailed */
 #weather-data-detailed {
-    background-color: antiquewhite;
+    background: linear-gradient(to bottom, #e3bfff3d, #ffffff);
     display: flex;
     align-items: center;
     border-radius: 20px;
