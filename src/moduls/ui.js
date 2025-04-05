@@ -21,7 +21,7 @@ export class UI {
             //  this.slides = document.getElementsByClassName('today-card-detailed')
             setTimeout(() => {
                 this.carousel()
-            }, 3000)
+            }, 500)
         })
     }
 

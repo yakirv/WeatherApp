@@ -4,9 +4,9 @@ export class ApiHandler {
     constructor() {
         this.locationName = document.getElementById('location-name')
         this.maxTemp = document.getElementById('max-temp')
-        this.getNextDaysWeather()
+        //  this.getNextDaysWeather()
         this.getTodayWeather()
-        this.getTomorrowWeather()
+        // this.getTomorrowWeather()
     }
     getCurrentTime() {
         const currentTime = new Date()
@@ -41,6 +41,7 @@ export class ApiHandler {
 
             const todayHourly = await response.json()
             ui.newMyLocationObject(todayHourly)
+            // ui.newMyLocationObject(await this.searchLocation('london'))
 
             const hoursData = Array.from(todayHourly.days[0].hours)
             const dayDate = todayHourly.days[0].datetime
@@ -66,6 +67,19 @@ export class ApiHandler {
             for (let i = 0; i < data.length; i++) {
                 ui.todaydataDetailed(data[i], dayDate)
             }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    async searchLocation(location) {
+        const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/today?unitGroup=metric&include=hours&key=YSPHRYATMWY52EBAHNK378HAV&contentType=json`
+        try {
+            const response = await fetch(url, {
+                mode: 'cors',
+            })
+            const data = await response.json()
+            return data
         } catch (error) {
             console.error(error)
         }
