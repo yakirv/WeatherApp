@@ -18,8 +18,8 @@ export class UI {
             this.dataDetailed = document.getElementById('data-detailed-slides')
             this.icon = document.getElementById('icon-weather')
             setTimeout(() => {
-                this.carousel()
-            }, 500)
+                // this.carousel()
+            }, 5000)
         })
     }
 

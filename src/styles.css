@@ -14,8 +14,16 @@ body {
     grid-column: 1 / 7;
     height: 140px;
 }
+#error-message {
+    /*     display: none;
+ */
+    font-size: 5em;
+    position: relative;
+    right: 35%;
+    top: 20%;
+}
 #search {
-    width: 40em;
+    width: 45em;
     height: 2.5em;
     border-radius: 25px;
     border-style: none;
@@ -23,7 +31,7 @@ body {
     padding-left: 20px;
     position: relative;
     top: 30%;
-    right: 30%;
+    right: 35%;
 }
 #search-button {
     font-family: sans-serif;
@@ -35,7 +43,7 @@ body {
     border-radius: 20px;
     position: relative;
     top: 30%;
-    right: 25%;
+    right: 31%;
 }
 #search-button:hover {
     background-color: #0090c1;
@@ -110,7 +118,7 @@ body {
 }
 
 #location-card-container {
-    display: flex;
+    display: none;
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
     justify-content: center;
 }

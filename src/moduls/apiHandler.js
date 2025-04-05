@@ -5,13 +5,10 @@ export class ApiHandler {
     constructor() {
         this.locationName = document.getElementById('location-name')
         this.maxTemp = document.getElementById('max-temp')
-        //  this.getNextDaysWeather()
-        //this.getTodayWeather('london')
-        // this.getTomorrowWeather()
     }
     getCurrentTime() {
         const currentTime = new Date()
-        // const hour = `${currentTime.getHours()}:00:00`
+
         return currentTime.getHours()
     }
     async getNextDaysWeather(location) {
