@@ -1,11 +1,12 @@
 import { ui } from '..'
+import { eventHandler } from '..'
 
 export class ApiHandler {
     constructor() {
         this.locationName = document.getElementById('location-name')
         this.maxTemp = document.getElementById('max-temp')
         //  this.getNextDaysWeather()
-        this.getTodayWeather()
+        //this.getTodayWeather('london')
         // this.getTomorrowWeather()
     }
     getCurrentTime() {
@@ -13,9 +14,8 @@ export class ApiHandler {
         // const hour = `${currentTime.getHours()}:00:00`
         return currentTime.getHours()
     }
-    async getNextDaysWeather() {
-        const url =
-            'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/petah%20tikva?unitGroup=metric&include=days&key=YSPHRYATMWY52EBAHNK378HAV&contentType=json'
+    async getNextDaysWeather(location) {
+        const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&include=days&key=YSPHRYATMWY52EBAHNK378HAV&contentType=json`
         try {
             const response = await fetch(url, {
                 mode: 'cors',
@@ -30,18 +30,16 @@ export class ApiHandler {
         } catch (error) {}
     }
 
-    async getTodayWeather() {
+    async getTodayWeather(location, locationName) {
         const currentHour = this.getCurrentTime()
-        const url =
-            'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/petah%20tikva?unitGroup=metric&include=hours&key=YSPHRYATMWY52EBAHNK378HAV&contentType=json'
+        const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&include=hours&key=YSPHRYATMWY52EBAHNK378HAV&contentType=json`
         try {
             const response = await fetch(url, {
                 mode: 'cors',
             })
 
             const todayHourly = await response.json()
-            ui.newMyLocationObject(todayHourly)
-            // ui.newMyLocationObject(await this.searchLocation('london'))
+            ui.newMyLocationObject(todayHourly, locationName)
 
             const hoursData = Array.from(todayHourly.days[0].hours)
             const dayDate = todayHourly.days[0].datetime
@@ -53,9 +51,8 @@ export class ApiHandler {
             }
         } catch (error) {}
     }
-    async getTomorrowWeather() {
-        const url =
-            'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/petah%20tikva/tomorrow?unitGroup=metric&include=hours&key=YSPHRYATMWY52EBAHNK378HAV&contentType=json'
+    async getTomorrowWeather(location) {
+        const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/tomorrow?unitGroup=metric&include=hours&key=YSPHRYATMWY52EBAHNK378HAV&contentType=json`
         try {
             const response = await fetch(url, {
                 mode: 'cors',
@@ -79,9 +76,28 @@ export class ApiHandler {
                 mode: 'cors',
             })
             const data = await response.json()
+
             return data
         } catch (error) {
             console.error(error)
         }
+    }
+
+    async getLocationName(latitude, longitude) {
+        const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=he`
+
+        const response = await fetch(url, {
+            headers: {
+                'User-Agent': 'MyWheatherApp/1.0', // Required by Nominatim usage policy
+            },
+            mode: 'cors',
+        })
+        try {
+            const data = await response.json()
+            const city = data.address.city
+            const country = data.address.country
+
+            return { city, country }
+        } catch {}
     }
 }
