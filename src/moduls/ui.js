@@ -17,20 +17,12 @@ export class UI {
             this.container = document.getElementById('next-days-container')
             this.dataDetailed = document.getElementById('data-detailed-slides')
             this.icon = document.getElementById('icon-weather')
-            this.clickSearch()
-            //  this.slides = document.getElementsByClassName('today-card-detailed')
             setTimeout(() => {
                 this.carousel()
             }, 500)
         })
     }
 
-    clickSearch() {
-        const searchBtn = document.getElementById('search-button')
-        searchBtn.addEventListener('click', () => {
-            alert('CLicKCkCK')
-        })
-    }
     async loadIcon(src) {
         try {
             const icon = await import(`/src/iconsColor/${src}.png`)
@@ -41,8 +33,11 @@ export class UI {
         }
     }
 
-    newMyLocationObject(weatherData) {
-        this.locationName.innerText = weatherData.resolvedAddress
+    newMyLocationObject(
+        weatherData,
+        locationName = weatherData.resolvedAddress
+    ) {
+        this.locationName.innerText = locationName
         this.maxTemp.innerText = `${weatherData.days[0].tempmax} °C`
         this.minTemp.innerText = `${weatherData.days[0].tempmin} °C`
         this.date.innerText = this.convertDateFormat(
@@ -81,7 +76,7 @@ export class UI {
         detailedObj.hour.innerText = todayData.datetime
         detailedObj.date.innerText = convertedDate
         detailedObj.hourTemp.innerText = todayData.temp
-        detailedObj.humidity.innerText = todayData.humidity
+        detailedObj.humidity.innerText = `${todayData.humidity}%`
         const iconSrc = todayData.icon
         this.loadIcon(iconSrc).then((src) => {
             detailedObj.hourIcon.src = src
@@ -159,16 +154,16 @@ export class UI {
         prevButton.addEventListener('click', goToNextSlide)
 
         // Optional: Auto-play functionality
-        let autoPlayInterval = setInterval(goToNextSlide, 5000)
+        /*    let autoPlayInterval = setInterval(goToNextSlide, 5000)
 
-        // Optional: Pause auto-play on hover
+      
         slidesContainer.addEventListener('mouseenter', () =>
             clearInterval(autoPlayInterval)
         )
         slidesContainer.addEventListener(
             'mouseleave',
             () => (autoPlayInterval = setInterval(goToNextSlide, 5000))
-        )
+        ) */
 
         //  Initialize carousel
         updateCarousel()
