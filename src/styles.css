@@ -177,17 +177,19 @@ body {
     left: 10px;
 }
 
-/* Media Queries */
 /* Mobile devices */
 @media (max-width: 767px) {
-    body {
-        display: flex;
-        flex-direction: column; /* Stack elements vertically */
-    }
-
     #header,
     #content {
         width: 100%;
+    }
+    #content {
+        height: 100%;
+    }
+    #error-message {
+        font-size: 45px;
+        position: relative;
+        right: 10%;
     }
     #search {
         width: 20em;
@@ -243,6 +245,10 @@ body {
 @media (min-width: 768px) and (max-width: 1023px) {
     #next-days-container {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    #error-message {
+        position: relative;
+        right: 10%;
     }
     #search {
         width: 40em;
