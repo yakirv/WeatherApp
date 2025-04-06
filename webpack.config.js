@@ -8,8 +8,9 @@ module.exports = {
 
     output: {
         filename: 'main.js',
-        path: path.resolve(__dirname, 'docs'),
+        path: path.resolve(__dirname, 'dist'),
         clean: true,
+        publicPath: '/WeatherApp/', // Add this line with your repo name
     },
 
     devtool: 'eval-source-map',
@@ -20,7 +21,7 @@ module.exports = {
         children: true,
     },
 
-    mode: 'development',
+    mode: 'development', // You'll want to change this to "production" for builds
 
     plugins: [
         new HtmlWebpackPlugin({
