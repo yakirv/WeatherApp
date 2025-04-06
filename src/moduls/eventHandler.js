@@ -23,6 +23,7 @@ export class EventHandler {
             this.message.style.display = 'none'
             const searchValue = this.formatSearchValue(this.searchField.value)
             const apiResult = apiHandler.searchLocation(searchValue)
+            ui.clearNextDaysCards()
             ui.newMyLocationObject(await apiResult)
             apiHandler.getNextDaysWeather(await searchValue)
             apiHandler.getTomorrowWeather(await searchValue)
@@ -71,7 +72,7 @@ export class EventHandler {
 
         async function errorCallback(error) {
             const message = document.getElementById('error-message')
-            message.style.display = 'block'
+            message.style.display = 'flex'
         }
     }
 }

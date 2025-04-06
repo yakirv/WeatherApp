@@ -18,7 +18,7 @@ export class UI {
             this.dataDetailed = document.getElementById('data-detailed-slides')
             this.icon = document.getElementById('icon-weather')
             setTimeout(() => {
-                // this.carousel()
+                this.carousel()
             }, 5000)
         })
     }
@@ -47,6 +47,11 @@ export class UI {
         this.loadIcon(iconSrc).then((src) => {
             this.icon.src = src
         })
+    }
+    clearNextDaysCards() {
+        while (this.container.firstChild) {
+            this.container.removeChild(this.container.firstChild)
+        }
     }
     dayObject(day) {
         const dayCard = document.createElement('div')
@@ -107,10 +112,10 @@ export class UI {
         hour.className = 'hour-field'
         const date = document.createElement('p')
         const hourTempProperty = document.createElement('p')
-        hourTempProperty.innerText = 'טמפ׳'
+        hourTempProperty.innerText = 'Temp'
         const hourTemp = document.createElement('p')
         const humidityProperty = document.createElement('p')
-        humidityProperty.innerText = 'לחות'
+        humidityProperty.innerText = 'Humidity'
         const humidity = document.createElement('p')
         const hourIcon = document.createElement('img')
 
@@ -150,8 +155,9 @@ export class UI {
             updateCarousel()
         }
 
-        nextButton.addEventListener('click', goToPrevSlide)
-        prevButton.addEventListener('click', goToNextSlide)
+        prevButton.addEventListener('click', goToPrevSlide)
+
+        nextButton.addEventListener('click', goToNextSlide)
 
         // Optional: Auto-play functionality
         /*    let autoPlayInterval = setInterval(goToNextSlide, 5000)
