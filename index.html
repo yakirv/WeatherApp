@@ -1,38 +1,41 @@
 <!doctype html>
-<html lang="iw" dir="rtl">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Weather</title>
-    <script defer src="/WeatherApp/main.js"></script></head>
+    <script defer src="main.js"></script></head>
     <body>
         <div id="header">
             <input type="text" id="search" />
-            <button id="search-button">חיפוש</button>
+            <button id="search-button">Search</button>
         </div>
         <div id="content">
-            <p id="error-message">אין הרשאות מיקום</p>
+            <div id="error-message">
+                <h1 id="error-message-header">Location permissions Denied</h1>
+                <p id="error-message-note">Please enter your location</p>
+            </div>
             <div id="location-card-container">
                 <div id="my-location">
-                    <h2 id="my-location-header">המיקום שלי</h2>
+                    <h2 id="my-location-header">My Location</h2>
                     <h3 id="location-name"></h3>
                     <div id="my-location-data">
                         <p id="my-location-date" class="my-location-property">
-                            תאריך:
+                            Date
                         </p>
                         <p id="location-date"></p>
                         <p
                             id="my-location-max-temp"
                             class="my-location-property"
                         >
-                            טמפ׳ מקסימלית:
+                            Maximum Temp.
                         </p>
                         <p id="max-temp"></p>
                         <p
                             id="my-location-min-temp"
                             class="my-location-property"
                         >
-                            טמפ׳ מינימלית:
+                            Minimum Temp
                         </p>
                         <p id="min-temp"></p>
                         <img id="icon-weather" />
