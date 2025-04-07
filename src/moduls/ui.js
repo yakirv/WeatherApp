@@ -144,13 +144,13 @@ export class UI {
         }
 
         function goToNextSlide() {
-            currentIndex = (currentIndex + 1) % slides.length
+            currentIndex = (currentIndex - 1) % slides.length
             console.log(currentIndex)
             updateCarousel()
         }
 
         function goToPrevSlide() {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length
+            currentIndex = (currentIndex + 1 + slides.length) % slides.length
             console.log(currentIndex)
             updateCarousel()
         }
