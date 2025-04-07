@@ -4,13 +4,13 @@ import { ui } from '..'
 export class EventHandler {
     searchButton
     searchField
-    mylcationContianer
+    myLocationContianer
     message
 
     constructor() {
         this.searchButton = document.getElementById('search-button')
         this.searchField = document.getElementById('search')
-        this.mylcationContianer = document.getElementById(
+        this.myLocationContianer = document.getElementById(
             'location-card-container'
         )
         this.message = document.getElementById('error-message')
@@ -19,7 +19,7 @@ export class EventHandler {
     }
     clickSearch() {
         this.searchButton.addEventListener('click', async () => {
-            this.mylcationContianer.style.display = 'flex'
+            this.myLocationContianer.style.display = 'flex'
             this.message.style.display = 'none'
             const searchValue = this.formatSearchValue(this.searchField.value)
             const apiResult = apiHandler.searchLocation(searchValue)
@@ -42,39 +42,42 @@ export class EventHandler {
     getlocation() {
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(
-                successCallback,
+                this.successCallback,
                 errorCallback,
                 {
-                    enableHighAccuracy: true, // Try to get the most accurate location
-                    timeout: 5000, // Maximum time (in milliseconds) to wait for a response
-                    maximumAge: 0, // Indicates that the device should not return a cached location
+                    enableHighAccuracy: false,
+                    maximumAge: 0,
+                    timeout: 5000,
                 }
             )
         } else {
             alert('Geolocation is not supported by your browser.')
         }
 
-        async function successCallback(position) {
-            mylcationContianer.style.display = 'flex'
-            message.style.display = 'none'
-            const latitude = position.coords.latitude
-            const longitude = position.coords.longitude
-            const locationName = await apiHandler.getLocationName(
-                latitude,
-                longitude
-            )
-            const locationNameformated = `${locationName.city}, ${locationName.country}`
-            const queryParam = `${latitude}%2C%20${longitude}`
-            setTimeout(() => {
-                apiHandler.getTodayWeather(queryParam, locationNameformated)
-                apiHandler.getNextDaysWeather(queryParam)
-                apiHandler.getTomorrowWeather(queryParam)
-            }, 3000)
-        }
-
         async function errorCallback(error) {
             const message = document.getElementById('error-message')
+            console.error('Error callback is running')
             message.style.display = 'flex'
         }
+    }
+    async successCallback(position) {
+        const message = document.getElementById('error-message')
+        const myLocationContianer = document.getElementById(
+            'location-card-container'
+        )
+        myLocationContianer.style.display = 'flex'
+        message.style.display = 'none'
+        const latitude = position.coords.latitude
+        const longitude = position.coords.longitude
+        const locationName = await apiHandler.getLocationName(
+            latitude,
+            longitude
+        )
+        const locationNameformated = `${locationName.city}, ${locationName.country}`
+        const queryParam = `${latitude}%2C%20${longitude}`
+
+        apiHandler.getTodayWeather(queryParam, locationNameformated)
+        apiHandler.getNextDaysWeather(queryParam)
+        apiHandler.getTomorrowWeather(queryParam)
     }
 }
