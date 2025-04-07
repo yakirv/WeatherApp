@@ -65,9 +65,11 @@ export class EventHandler {
             )
             const locationNameformated = `${locationName.city}, ${locationName.country}`
             const queryParam = `${latitude}%2C%20${longitude}`
-            apiHandler.getTodayWeather(queryParam, locationNameformated)
-            apiHandler.getNextDaysWeather(queryParam)
-            apiHandler.getTomorrowWeather(queryParam)
+            setTimeout(() => {
+                apiHandler.getTodayWeather(queryParam, locationNameformated)
+                apiHandler.getNextDaysWeather(queryParam)
+                apiHandler.getTomorrowWeather(queryParam)
+            }, 3000)
         }
 
         async function errorCallback(error) {
