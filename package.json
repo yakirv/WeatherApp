@@ -6,7 +6,8 @@
         "build": "webpack",
         "watch": "webpack --watch",
         "start": "webpack serve  --open --mode development",
-        "build:prod": "webpack --mode production"
+        "build:prod": "webpack --mode production",
+        "deploy": "npx gh-pages -d dist"
     },
     "lint-staged": {
         "**/*": "prettier --write --ignore-unknown"
